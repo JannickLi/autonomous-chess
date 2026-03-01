@@ -95,6 +95,8 @@ The So101ChessBot module controls a SO101 6-DOF robotic arm to physically move c
 
 Board knowledge comes from a joint-angle lookup table calibrated by physically teleoperating the arm above each of all 64 squares and recording the joint configuration, rather than computing positions analytically from board geometry. Pick-and-place motions are executed by replaying pre-recorded human demonstrations from a LeRobot dataset — separate pick and place episodes exist for each square, keyed by piece type — because the descent, grasp, and lift trajectories depend on piece geometry and are difficult to parameterize analytically. The move execution system handles normal moves, captures with graveyard placement for removed pieces, en passant, castling with sequential king-then-rook movements, and pawn promotion.
 
+![SO101 Robotic Arm](ressources/robot.jpeg)
+
 **Submodules:**
 - `lerobot_chess_bot/so101_ik.py` — Thread-safe IK controller with Pinocchio/Pink solver and 50 Hz observation loop
 - `lerobot_chess_bot/chess_board.py` — Joint-angle lookup table with teleoperation-based calibration for all 64 squares
