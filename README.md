@@ -1,5 +1,7 @@
 # Autonomous Chess Robot
 
+Created for the Mistral AI Hackathon 2026 by Stefan Bühler, Mark Schutera, and Jannick Lippert.
+
 A human plays physical chess against a team of AI-powered chess piece agents. A robotic arm executes moves on a real board, LLM agents deliberate and vote on strategy, computer vision detects the board state, and the system narrates the game with distinct character voices. ElevenLabs powers both text-to-speech — giving each chess piece its own voice — and realtime speech-to-text for hands-free move input. Various Mistral AI models handle a wide range of creative and administrative tasks throughout the system, from agent deliberation and move voting to parsing spoken moves, generating theatrical game commentary, and supervisor-level position analysis. A central orchestrator ties everything together through a state machine, with a live web dashboard showing the game in real time.
 
 ## Architecture
