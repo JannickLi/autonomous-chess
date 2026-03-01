@@ -7,23 +7,43 @@ A human plays physical chess against a team of AI-powered chess piece agents. A 
 ## Architecture
 
 ```
-               Human (voice / CLI / physical board)
-                              │
-         ┌────────────────────▼─────────────────────┐
-         │         chess_manager (Orchestrator)     │
-         │                                          │
-         │  State Machine:                          │
-         │  WAITING → HUMAN_TURN → VALIDATING →     │
-         │  AGENT_TURN → THINKING → EXECUTING →     │
-         │  GAME_OVER                               │
-         │                                          │
-         └──┬──────────┬──────────┬─────────────────┘
-            │          │          │
-     ┌──────▼───┐ ┌────▼────┐ ┌──▼──────────────┐
-     │  Robot   │ │ Agents  │ │  Perception     │
-     │So101Chess│ │animated-│ │  venividivici   │
-     │  Bot     │ │ knight  │ │  YOLOv8         │
-     └──────────┘ └─────────┘ └─────────────────┘
+                        Human
+              voice / CLI / physical board
+                          │
+                          │ spoken moves, typed UCI, piece movements
+                          ▼
+┌───────────────────────────────────────────────────────────────────┐
+│                                                                   │
+│              chess_manager (AI-Powered Orchestrator)              │
+│                                                                   │
+│   Game state, move validation, voice I/O, teacher commentary      │
+│                                                                   │
+└───────┬───────────────────┬───────────────────┬───────────────────┘
+        │                   │                   │
+        │ MoveCommand       │ FEN + strategy    │ capture trigger
+        │ (piece, square,   │                   │
+        │  capture flags)   │                   │
+        ▼                   ▼                   ▼
+┌───────────────┐  ┌─────────────────┐  ┌───────────────────┐
+│   So101Chess  │  │ animated-knight │  │   venividivici    │
+│     Bot       │  │                 │  │                   │
+│  6-DOF Robot  │  │  Multi-Agent    │  │  YOLOv8 Chess     │
+│  Arm Control  │  │  LLM System     │  │  Piece Detection  │
+└───────┬───────┘  └────────┬────────┘  └─────────┬─────────┘
+        │                   │                     │
+        │ success/error,    │ selected move,      │ FEN, piece
+        │ execution time    │ agent opinions,     │ positions,
+        │                   │ voting summary      │ confidence
+        ▼                   ▼                     ▼
+┌───────────────────────────────────────────────────────────────────┐
+│                                                                   │
+│              chess_manager (AI-Powered Orchestrator)              │
+│                                                                   │
+├───────────────────────┬───────────────────────────────────────────┤
+│   React Dashboard     │              ROS2 / chess_msgs            │
+│   (WebSocket)         │    BoardState, MoveCommand, MoveResult,   │
+│                       │    AgentRequest, AgentOpinions            │
+└───────────────────────┴───────────────────────────────────────────┘
 ```
 
 ### ROS2 Communication Layer
@@ -32,7 +52,7 @@ All inter-component communication flows through ROS2 topics using custom message
 
 ## Modules
 
-### chess_manager — Central Orchestrator
+### chess_manager — AI-Powered Orchestrator
 
 The Chess Manager owns the authoritative game state and runs a 7-state async state machine that drives the full game loop: waiting for the human to move, validating the move, requesting an AI response from the agents, and commanding the robot arm to execute the chosen move on the physical board. Human moves can arrive from three sources — a CLI text interface, voice input via ElevenLabs realtime speech-to-text with Mistral-powered natural language move parsing, or a computer vision capture that diffs the detected board state against the known position to infer which move was made.
 
