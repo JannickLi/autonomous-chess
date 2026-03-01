@@ -1,0 +1,8 @@
+python-chess>=1.10.0
+pyyaml>=6.0
+httpx>=0.27.0
+websockets>=12.0
+mistralai
+pyaudio
+elevenlabs
+python-dotenv

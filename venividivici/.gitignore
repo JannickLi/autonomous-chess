@@ -1,0 +1,90 @@
+build/
+dist/
+# -----------------------------
+# Project data and outputs
+# -----------------------------
+# Generated / large data
+dataset/
+runs/
+validation/
+
+# Optional local/real data (uncomment if you keep large image sets out of VCS)
+# real_data/
+
+# -----------------------------
+# Python artifacts
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dylib
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Installer logs
+pip-log.txt
+
+# -----------------------------
+# Environment & tooling
+# -----------------------------
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Pipenv
+Pipfile.lock
+
+# Pyenv
+.python-version
+
+# Poetry
+poetry.lock
+
+# -----------------------------
+# Tests / linters / typecheck
+# -----------------------------
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+coverage.xml
+.coverage
+
+# -----------------------------
+# Editors / IDEs
+# -----------------------------
+.vscode/
+.idea/
+.ropeproject/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# -----------------------------
+# Logs, secrets, misc
+# -----------------------------
+*.log
+.env
+.env.*
+secrets.json
+credentials.json
+
+# Certificates / keys
+*.pem
+*.key
+*.p12
+
+# OS
+.DS_Store
+Thumbs.db
+

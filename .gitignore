@@ -146,3 +146,11 @@ Thumbs.db
 stuff/
 chess_ws/
 ARCHITECTURE_REDESIGN.md
+animated-knight-main/
+animated-knight/docs/
+
+# ==============================
+# So101ChessBot (Robot)
+# ==============================
+So101ChessBot/data/
+So101ChessBot/.calibrations/*.bak.json
