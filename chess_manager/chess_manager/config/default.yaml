@@ -1,0 +1,39 @@
+chess_manager:
+  # Timeouts (seconds)
+  perception_timeout_sec: 10.0
+  agent_timeout_sec: 60.0
+  robot_timeout_sec: 120.0
+
+  # Simulation mode: set to true to skip robot execution (default: false = ROS/hardware mode)
+  simulation_mode: false
+
+  # TCP bridge ports
+  tcp_ports:
+    bridge_port: 9996       # Chess Manager's own ros_bridge_server instance
+    robot_port: 9999
+    perception_port: 9997
+    agents_port: 9998
+
+  # WebSocket server
+  websocket:
+    host: "0.0.0.0"
+    port: 8765
+
+  # Agent backend (animated-knight) — communicates via ROS topics
+  # Agent timeout uses agent_timeout_sec above; strategy uses agent_strategy in game settings
+
+  # Game settings
+  human_color: "white"
+  agent_strategy: "hybrid"
+  parallel_robot_voice: true
+
+  # Teacher (Stockfish analysis) -- disabled until Phase 4
+  teacher_enabled: true
+  stockfish_path: "/usr/games/stockfish"
+  analysis_depth: 20
+
+  # Voice -- disabled until Phase 5
+  voice_enabled: true
+  speak_agent_opinions: true
+  speak_teacher_feedback: true
+  max_opinions_to_speak: 1

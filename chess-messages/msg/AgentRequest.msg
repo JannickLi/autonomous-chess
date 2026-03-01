@@ -1,0 +1,2 @@
+string fen
+string strategy
