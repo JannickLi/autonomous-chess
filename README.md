@@ -58,6 +58,8 @@ The Chess Manager owns the authoritative game state and runs a 7-state async sta
 
 A built-in chess teacher runs Stockfish analysis in the background after every human move and uses Mistral to generate witty sports-broadcaster-style commentary, which is spoken aloud through ElevenLabs TTS. Each chess piece type is mapped to a distinct ElevenLabs voice with its own character — the King speaks with a deep commanding tone, the Queen is assertive, the Knight energetic — bringing the agent deliberation to life as pieces explain their reasoning out loud. A React dashboard connects via WebSocket and mirrors the game in real time, showing the board, state pipeline, animated SVG piece avatars with speaking mouth animations, agent deliberation results, and move history.
 
+![Chess Manager Dashboard](ressources/chess_manager.png)
+
 **Submodules:**
 - `state_manager.py` — Core state machine and async game loop with move validation and perception diffing
 - `chess_teacher.py` — Stockfish position analysis + Mistral commentary generation + TTS playback
@@ -72,6 +74,8 @@ A built-in chess teacher runs Stockfish analysis in the background after every h
 The animated-knight system implements a multi-agent architecture where every chess piece on the board is backed by its own LLM agent with a distinct personality, and agents collectively deliberate and vote on which move to play. Each piece agent carries six weighted personality traits — self-preservation, personal glory, team victory, aggression, positional dominance, and cooperation — that are injected into its prompts as natural language descriptions and percentage-weighted evaluation criteria, shaping how the agent reasons about candidate moves without any model fine-tuning. The piece's value determines its voting weight (pawn=1, knight/bishop=3, rook=5, queen=9, king=10), so higher-value pieces have more influence on the final decision.
 
 Three decision strategies are available. The Democratic strategy has each movable piece propose its own best move, then all pieces vote on the proposals with piece-value weighting. The Supervisor strategy uses a higher-level coordinator agent that analyzes the position — optionally assisted by Stockfish for the top-3 engine moves — and makes the final call after reading all proposals. The Hybrid strategy, which is the default, cleanly separates analysis from preference: the supervisor produces three descriptive candidate options with per-piece impact assessments, and every piece votes on prose descriptions rather than chess notation, forcing personality-driven reasoning. The LLM provider layer abstracts over Mistral, OpenAI, and Anthropic, allowing a larger model for supervisor analysis and a smaller model for the up-to-16 parallel agent voting calls. The entire deliberation pipeline streams end-to-end, enabling the React frontend to show agent thoughts, proposals, votes with personality bar charts, and animated vote tallies appearing in real time.
+
+![Agent Deliberation and Voting](ressources/agent_voting.png)
 
 **Submodules:**
 - `backend/agents/` — Per-piece LLM agents with personality-driven proposal and voting, supervisor agent with optional Stockfish analysis
@@ -107,6 +111,8 @@ The venividivici module provides YOLOv8-based chess piece detection that takes a
 The training pipeline requires only a handful of real photos per board. An interactive annotation tool records the four board corners in empty board images, from which all 64 square centers are derived via perspective transform. Piece crops are annotated with polygon masks to preserve their shape under perspective distortion. A synthetic data generator then composites these RGBA piece crops onto empty board photos with random augmentations — affine transforms, flips, blur, shear, jitter, and rotation — producing unlimited YOLO-format training data. Training itself uses online synthetic generation: a custom PyTorch dataset creates fresh random images each epoch rather than reading from disk, with early stopping and periodic visual validation grids color-coded by prediction accuracy. Multiple boards can be pooled to improve generalization across different boards, lighting, and camera angles.
 
 At inference time, the detected corner markers define a homography that maps each piece detection from pixel space to board coordinates, producing an 8×8 grid that is converted to FEN notation. A ROS2 bridge node receives capture triggers from the chess manager, forwards them to the YOLO detection worker, and publishes the resulting board state back as a `BoardState` message.
+
+![YOLOv8 Chess Piece Detection](ressources/detection.png)
 
 **Submodules:**
 - `scripts/annotate_fields.py` — Interactive board corner annotation with perspective-based square center computation
