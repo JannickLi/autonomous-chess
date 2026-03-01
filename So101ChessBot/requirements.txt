@@ -1,0 +1,9 @@
+pin 
+pin-pink 
+qpsolvers 
+quadprog
+meshcat
+numpy
+# rclpy
+python-chess
+# opencv-python

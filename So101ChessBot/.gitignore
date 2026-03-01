@@ -1,0 +1,35 @@
+# Python
+.venv
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# Editors / tooling
+.claude
+.vscode
+.idea/
+
+# LeRobot datasets (trajectories, videos, frames)
+lerobot_dataset*/
+lerobot_demo_dataset*/
+data/
+outputs/
+captured_images/
+
+# Calibration backups (keep current calibrations, ignore timestamped backups)
+.calibrations/*.bak.json
+
+# Misc large / generated files
+*.mp4
+*.avi
+*.mov
+*.parquet
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# OS
+.DS_Store
+Thumbs.db

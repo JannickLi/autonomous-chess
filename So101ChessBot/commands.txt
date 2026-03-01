@@ -1,0 +1,61 @@
+lerobot-record \
+    --robot.type=so101_follower \
+    --robot.port=/dev/ttyACM0 \
+    --robot.id=w_so101_follower \
+    --robot.cameras="{ camera1: {type: opencv, index_or_path: 1, width: 640, height: 480, fps: 30}}" \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM1 \
+    --teleop.id=w_so101_leader \
+    --display_data=true \
+    --dataset.repo_id=SLab/trajectory2 \
+    --dataset.num_episodes=1 \
+    --dataset.single_task="E4E5" \
+    --dataset.push_to_hub=false \
+    --dataset.episode_time_s=15
+
+lerobot-replay \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM0 \
+  --robot.id=w_so101_follower \
+  --dataset.repo_id=local/so101-chess-teleop  \
+  --dataset.episode=0 \
+  --dataset.root=./lerobot_dataset
+
+lerobot-train \
+  --dataset.repo_id=local/so101-chess-teleop  \
+  --policy.type=act \
+  --output_dir=outputs/train/chess_grab_act \
+  --job_name=act_your_dataset \
+  --policy.device=cuda \
+  --wandb.enable=false \
+  --dataset.root=./lerobot_dataset_4 \
+  --policy.repo_id=local/act_policy \
+  --policy.push_to_hub=false \
+  --log_freq=100
+
+
+
+lerobot-edit-dataset \
+    --dataset.root=./lerobot_dataset \
+    --repo_id lerobot/pusht_merged \
+    --operation.type merge \
+    --operation.repo_ids "['lerobot/pusht_train', 'lerobot/pusht_val']"
+
+lerobot-dataset-viz \
+    --root=./lerobot_dataset \
+    --repo-id=local/so101-chess-teleop \
+    --episode-index=0 \
+    --display-compressed-images=true
+
+
+lerobot-record \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM0 \
+  --robot.id=w_so101_follower \
+  --robot.cameras="{ camera1: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30}}" \
+  --display_data=true \
+  --dataset.repo_id=del/eval_act_your_dataset3 \
+  --dataset.num_episodes=1 \
+  --dataset.single_task="Your task description" \
+  --policy.path="outputs/train/act_your_dataset/checkpoints/025000/pretrained_model" \
+  --dataset.push_to_hub=false 
