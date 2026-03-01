@@ -1,0 +1,27 @@
+strategy: democratic
+description: >
+  Each movable piece proposes a move from its perspective,
+  then all pieces vote on the proposals. Votes are weighted
+  by piece value, and the majority wins.
+
+voting:
+  method: weighted
+  weights:
+    king: 10
+    queen: 9
+    rook: 5
+    bishop: 3
+    knight: 3
+    pawn: 1
+
+agents:
+  - type: piece_agent
+    for_each: movable_piece
+    llm_provider: mistral
+    model: mistral-medium
+
+llm_defaults:
+  provider: mistral
+  model: mistral-medium
+  temperature: 0.7
+  max_tokens: 1024

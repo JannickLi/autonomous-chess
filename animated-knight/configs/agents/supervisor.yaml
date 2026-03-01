@@ -1,0 +1,23 @@
+strategy: supervisor
+description: >
+  A supervisor agent coordinates piece agents, reviewing their
+  proposals and making the final decision. The supervisor can
+  override individual piece recommendations based on strategic
+  considerations.
+
+supervisor:
+  llm_provider: mistral
+  model: mistral-medium
+  temperature: 0.7
+
+piece_agents:
+  type: piece_agent
+  for_each: movable_piece
+  llm_provider: mistral
+  model: mistral-medium
+
+llm_defaults:
+  provider: mistral
+  model: mistral-medium
+  temperature: 0.7
+  max_tokens: 1024

@@ -1,0 +1,262 @@
+# Personality configurations for chess piece agents
+#
+# Each piece type can have personality weights from 0.0 to 1.0:
+#   - self_preservation: Avoid getting captured, stay safe
+#   - personal_glory: Make impactful moves, be the hero, get captures
+#   - team_victory: Prioritize moves that help the team win
+#   - aggression: Attack opponent pieces, create threats
+#   - positional_dominance: Control key squares, maximize mobility
+#   - cooperation: Support other pieces, enable team plays
+#
+# Higher values = agent cares more about this aspect
+# The weights are relative to each other
+
+# Default balanced personalities
+default:
+  pawn:
+    self_preservation: 0.4    # Pawns know they're expendable but still want to live
+    personal_glory: 0.6       # Dream of promotion!
+    team_victory: 0.7
+    aggression: 0.5
+    positional_dominance: 0.6  # Pawn structure matters
+    cooperation: 0.6           # Pawns work together
+
+  knight:
+    self_preservation: 0.5
+    personal_glory: 0.7       # Knights love flashy forks
+    team_victory: 0.6
+    aggression: 0.7           # Aggressive jumpers
+    positional_dominance: 0.5
+    cooperation: 0.5
+
+  bishop:
+    self_preservation: 0.5
+    personal_glory: 0.5
+    team_victory: 0.7
+    aggression: 0.5
+    positional_dominance: 0.8  # Bishops love long diagonals
+    cooperation: 0.6
+
+  rook:
+    self_preservation: 0.6    # Rooks are valuable
+    personal_glory: 0.5
+    team_victory: 0.7
+    aggression: 0.6
+    positional_dominance: 0.7  # Open files!
+    cooperation: 0.7           # Rooks work great in pairs
+
+  queen:
+    self_preservation: 0.7    # Queen is precious
+    personal_glory: 0.8       # Queen loves being the star
+    team_victory: 0.6
+    aggression: 0.7
+    positional_dominance: 0.6
+    cooperation: 0.4          # Queen often works alone
+
+  king:
+    self_preservation: 0.9    # King MUST survive
+    personal_glory: 0.3       # King stays humble in middlegame
+    team_victory: 0.9         # King's survival IS team victory
+    aggression: 0.2           # King avoids fights
+    positional_dominance: 0.4
+    cooperation: 0.7          # King needs protection
+
+# Alternative: Aggressive army
+aggressive:
+  pawn:
+    self_preservation: 0.2
+    personal_glory: 0.7
+    team_victory: 0.6
+    aggression: 0.9
+    positional_dominance: 0.4
+    cooperation: 0.4
+
+  knight:
+    self_preservation: 0.3
+    personal_glory: 0.8
+    team_victory: 0.5
+    aggression: 0.9
+    positional_dominance: 0.4
+    cooperation: 0.3
+
+  bishop:
+    self_preservation: 0.3
+    personal_glory: 0.7
+    team_victory: 0.6
+    aggression: 0.8
+    positional_dominance: 0.5
+    cooperation: 0.4
+
+  rook:
+    self_preservation: 0.4
+    personal_glory: 0.7
+    team_victory: 0.6
+    aggression: 0.8
+    positional_dominance: 0.5
+    cooperation: 0.5
+
+  queen:
+    self_preservation: 0.4
+    personal_glory: 0.9
+    team_victory: 0.5
+    aggression: 0.9
+    positional_dominance: 0.5
+    cooperation: 0.2
+
+  king:
+    self_preservation: 0.8
+    personal_glory: 0.4
+    team_victory: 0.8
+    aggression: 0.3
+    positional_dominance: 0.3
+    cooperation: 0.6
+
+# Alternative: Defensive/cautious army
+defensive:
+  pawn:
+    self_preservation: 0.7
+    personal_glory: 0.3
+    team_victory: 0.8
+    aggression: 0.2
+    positional_dominance: 0.8
+    cooperation: 0.8
+
+  knight:
+    self_preservation: 0.6
+    personal_glory: 0.4
+    team_victory: 0.7
+    aggression: 0.3
+    positional_dominance: 0.7
+    cooperation: 0.7
+
+  bishop:
+    self_preservation: 0.6
+    personal_glory: 0.3
+    team_victory: 0.8
+    aggression: 0.3
+    positional_dominance: 0.9
+    cooperation: 0.7
+
+  rook:
+    self_preservation: 0.7
+    personal_glory: 0.3
+    team_victory: 0.8
+    aggression: 0.3
+    positional_dominance: 0.8
+    cooperation: 0.8
+
+  queen:
+    self_preservation: 0.8
+    personal_glory: 0.4
+    team_victory: 0.7
+    aggression: 0.4
+    positional_dominance: 0.7
+    cooperation: 0.6
+
+  king:
+    self_preservation: 0.95
+    personal_glory: 0.1
+    team_victory: 0.9
+    aggression: 0.1
+    positional_dominance: 0.5
+    cooperation: 0.8
+
+# Alternative: Selfish army (everyone for themselves)
+selfish:
+  pawn:
+    self_preservation: 0.8
+    personal_glory: 0.9
+    team_victory: 0.2
+    aggression: 0.5
+    positional_dominance: 0.4
+    cooperation: 0.1
+
+  knight:
+    self_preservation: 0.7
+    personal_glory: 0.9
+    team_victory: 0.3
+    aggression: 0.6
+    positional_dominance: 0.5
+    cooperation: 0.1
+
+  bishop:
+    self_preservation: 0.7
+    personal_glory: 0.8
+    team_victory: 0.3
+    aggression: 0.5
+    positional_dominance: 0.6
+    cooperation: 0.2
+
+  rook:
+    self_preservation: 0.8
+    personal_glory: 0.8
+    team_victory: 0.3
+    aggression: 0.5
+    positional_dominance: 0.5
+    cooperation: 0.2
+
+  queen:
+    self_preservation: 0.9
+    personal_glory: 0.95
+    team_victory: 0.2
+    aggression: 0.6
+    positional_dominance: 0.4
+    cooperation: 0.1
+
+  king:
+    self_preservation: 0.99
+    personal_glory: 0.5
+    team_victory: 0.4
+    aggression: 0.1
+    positional_dominance: 0.3
+    cooperation: 0.3
+
+# Alternative: Team-first army (selfless)
+teamfirst:
+  pawn:
+    self_preservation: 0.2
+    personal_glory: 0.2
+    team_victory: 0.95
+    aggression: 0.5
+    positional_dominance: 0.6
+    cooperation: 0.9
+
+  knight:
+    self_preservation: 0.3
+    personal_glory: 0.3
+    team_victory: 0.9
+    aggression: 0.5
+    positional_dominance: 0.5
+    cooperation: 0.8
+
+  bishop:
+    self_preservation: 0.3
+    personal_glory: 0.2
+    team_victory: 0.9
+    aggression: 0.4
+    positional_dominance: 0.6
+    cooperation: 0.8
+
+  rook:
+    self_preservation: 0.3
+    personal_glory: 0.2
+    team_victory: 0.9
+    aggression: 0.5
+    positional_dominance: 0.6
+    cooperation: 0.9
+
+  queen:
+    self_preservation: 0.4
+    personal_glory: 0.3
+    team_victory: 0.9
+    aggression: 0.5
+    positional_dominance: 0.5
+    cooperation: 0.7
+
+  king:
+    self_preservation: 0.7
+    personal_glory: 0.1
+    team_victory: 0.95
+    aggression: 0.2
+    positional_dominance: 0.4
+    cooperation: 0.9

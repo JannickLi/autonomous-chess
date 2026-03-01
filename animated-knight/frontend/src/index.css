@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #1a1a2e;
+  color: #eee;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a6a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5a8a;
+}
+
+/* Narrower scrollbar for nested panels */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Vote card entrance animation */
+@keyframes vote-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vote-card-enter {
+  animation: vote-card-enter 0.3s ease-out both;
+}
+
+/* Speech bubble triangle */
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 12px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid rgba(71, 85, 105, 0.4);
+}
+
+/* Slide down animation for expanded details */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.slide-down {
+  animation: slide-down 0.25s ease-out;
+}
+
+/* Decision card glow */
+.decision-card {
+  animation: decision-glow 2s ease-in-out;
+}
+
+@keyframes decision-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(34, 197, 94, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.15);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.05);
+  }
+}
